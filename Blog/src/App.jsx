@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Footer from "./assets/components/Footer";
 import { Post } from "./assets/components/post";
 import supabase from "./assets/lib/helper/supabaseClient";
+import Header from "./assets/components/Header";
 
 function App() {
   //useEffect sirve para ejecutar el codigo que tantas veces que queramos y depnde de las dependencias, las dependencias son variables
@@ -36,10 +37,10 @@ function App() {
 
   const posts = [
     {
-      titulo: "6ta jojo",
+      titulo: "publicidad en contra de pepsi",
       description: "Joylne Cuyoj",
-      link: "https://i.pinimg.com/236x/10/72/13/107213216b07a7f94c531b40313c00ed.jpg",
-      parrafo: "Amamos a joylne",
+      link: "https://imgs.search.brave.com/1FuzWHjMz6exTyEllwix9wbdH5IpxKT3FoA0yvNslNY/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWFn/ZXM3Lm1lbWVkcm9p/ZC5jb20vaW1hZ2Vz/L1VQTE9BREVENTU3/LzY2NjkwNDBlZDFm/NjEuanBlZw",
+      parrafo: "Gato coca",
     },
     {
       titulo: "6ta jojo",
@@ -54,15 +55,17 @@ function App() {
       <Header />
       <button onClick={handleLogin}> inicio sesion Github </button>
       <Footer />
-      {posts.map((elemento, index) => (
-        <Post
-          description={elemento.description}
-          link={elemento.link}
-          parrafo={elemento.parrafo}
-          titulo={elemento.titulo}
-          key={index}
-        />
-      ))}
+      <ul className="grilla-padre">
+        {posts.map((elemento, index) => (
+          <Post
+            description={elemento.description}
+            link={elemento.link}
+            parrafo={elemento.parrafo}
+            titulo={elemento.titulo}
+            key={index}
+          />
+        ))}
+      </ul>
     </>
   );
 }
