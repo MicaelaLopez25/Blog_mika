@@ -62,6 +62,18 @@ function App() {
       link: "https://i.pinimg.com/236x/8b/7d/0c/8b7d0c88227abf5a237870b047677b4b.jpg",
       parrafo: "Amamos a joylne",
     },
+    {
+      titulo: "gato com cara feia",
+      description: "Gato amarillo, mira mal",
+      link: "  https://i.pinimg.com/736x/70/90/f2/7090f2c633fa7ab7c7439bb33c053d1d.jpg",
+      parrafo: "Gato amarillo, mira mal",
+    },
+    {
+      titulo: "fino",
+      description: "Gato amarillo, mira mal",
+      link: "  https://i.pinimg.com/236x/52/da/31/52da31495b29fffd7e7b89ec6e9130f0.jpg",
+      parrafo: "gato fino para decirle a su mama que se llevo todas las materias",
+    },
   ];
 
 

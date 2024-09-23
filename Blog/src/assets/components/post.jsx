@@ -4,7 +4,7 @@ export function Post({ titulo, link, description, parrafo }) {
       <div
         className="card"
         data-aos="fade-up"
-        style={{ marginBottom: "10px", marginTop: "100px" }}
+        style={{ marginBottom: "7px", marginTop: "100px" }}
       >
         <img src={link} alt={description} className="card-img" />
         <div className="card-content color-letra">
@@ -15,3 +15,4 @@ export function Post({ titulo, link, description, parrafo }) {
     </>
   );
 }
+
