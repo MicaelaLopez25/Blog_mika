@@ -10,30 +10,44 @@ function App() {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    const getSession = async () => {
+    const session = supabase.auth.getSession(); 
+    setUser(session?.user);
       // destrucutracion -> nos permite obtener la propiedad deseada, van entre llaves {} los [] son un estado
-      const { data, error } = await supabase.auth.getSession();
-      if (error) {
-        console.log(error);
-      } else {
-        setUser(data?.sesson?.user);
-      } //cuando hay signos de preguntas es pq tal vez no existe y no rompe
-    };
-  }, []);
+      const {
+        data:{ subscription },
+      } = supabase.auth.onAuthStateChange((event, session) => {
+      switch (event) {
+        case "SIGNED_IN":
+         setUser(session?.user);
+        break;
+        case "SIGNED_OUT":
+         setUser(null);
+         break;
+         default:
+          console.log("caso no estimado");
+
+      }
+     });
 
   //la userState  es el valor que agarra para iniciarlizar
   // todo lo que piensa en use es un hook
+  return () => {
+    subscription.unsubscribe();
+
+  };
+},[]);
 
   const handleLogin = async () => {
-    const { error, data } = await supabase.auth.singInWithOauth({
+     await supabase.auth.signInWithOAuth ({
       provider: "github",
-    });
-    if (error) {
-      console.log(error);
-    } else {
-      console.log(data);
-    }
+    })
   };
+
+   const handleLogout = async () => {
+    await supabase.auth.singOut();
+   };
+
+
 
   const posts = [
     {
@@ -50,10 +64,12 @@ function App() {
     },
   ];
 
+
+
   return (
     <>
+
       <Header />
-      <button onClick={handleLogin}> inicio sesion Github </button>
       <Footer />
       <ul className="grilla-padre">
         {posts.map((elemento, index) => (
@@ -66,6 +82,14 @@ function App() {
           />
         ))}
       </ul>
+      {user ? (
+       <div>
+         <h2>Authenticated</h2>
+         <button onClick={handleLogout}>logout</button>
+       </div>
+      ) : (
+         <button onClick={handleLogin}> login Github</button>
+     ) }    
     </>
   );
 }
